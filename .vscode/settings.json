@@ -1,0 +1,13 @@
+{
+  "go.lintOnSave": "package",
+  "[go]": {
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    }
+  },
+  "go.lintTool": "golangci-lint",
+  "go.lintArgs": [
+    "--fast"
+  ]
+}
