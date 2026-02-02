@@ -50,9 +50,16 @@ func main() {
 	productService := services.NewProductService(productRepo)
 	productHandler := handlers.NewProductHandler(productService)
 
+	// categories
+	categoryRepo := repositories.NewCategoryRepository(db)
+	categoryService := services.NewCategoryService(categoryRepo)
+	categoryHandler := handlers.NewCategoryHandler(categoryService)
+
 	// Setup routes
 	http.HandleFunc("/api/produk", productHandler.HandleProducts)
 	http.HandleFunc("/api/produk/", productHandler.HandleProductByID)
+	http.HandleFunc("/api/kategori", categoryHandler.HandleCategories)
+	http.HandleFunc("/api/kategori/", categoryHandler.HandleCategoryByID)
 
 	// Start server
 	addr := "0.0.0.0:" + config.Port

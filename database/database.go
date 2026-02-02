@@ -26,21 +26,9 @@ func InitDB(connectionString string) (*sql.DB, error) {
 
 	db.SetMaxOpenConns(25)
 	db.SetMaxIdleConns(5)
-
-	// Create products table if not exists
-	createTableQuery := `
-	CREATE TABLE IF NOT EXISTS products (
-		id SERIAL PRIMARY KEY,
-		name VARCHAR(255) NOT NULL,
-		price DECIMAL(10, 2) NOT NULL,
-		stock INT NOT NULL,
-		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-		updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-	);
-	`
-	if _, err := db.Exec(createTableQuery); err != nil {
-		return nil, fmt.Errorf("failed to create table: %w", err)
-	}
+	// NOTE: DB schema (tables and relations) is managed externally/manual.
+	// This function only opens a connection and verifies it. No automatic
+	// migrations or ALTER TABLE statements are performed here.
 
 	log.Println("Database connected successfully")
 	return db, nil
