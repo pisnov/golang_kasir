@@ -8,7 +8,7 @@ import (
 	"os"
 	"strings"
 
-	_ "github.com/lib/pq"
+	_ "github.com/jackc/pgx/v5/stdlib"
 	"github.com/spf13/viper"
 )
 
@@ -36,7 +36,7 @@ func main() {
 		log.Fatal("DB_CONN tidak ditemukan dalam environment variables")
 	}
 
-	db, err := sql.Open("postgres", dbConn)
+	db, err := sql.Open("pgx", dbConn)
 	if err != nil {
 		log.Fatal("Gagal connect ke database:", err)
 	}
